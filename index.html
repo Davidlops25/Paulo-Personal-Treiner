@@ -4,133 +4,199 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paulo Fernando | Consultoria Elite</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0071ff;
             --primary-glow: rgba(0, 113, 255, 0.4);
-            --accent: #ffcc00;
-            --bg-deep: #000000;
-            --bg-surface: rgba(20, 20, 23, 0.7);
+            --accent: #f5c518;
+            --accent-glow: rgba(245, 197, 24, 0.3);
+            --bg-deep: #050505;
+            --bg-surface: rgba(20, 20, 22, 0.6);
+            --bg-surface-hover: rgba(30, 30, 35, 0.8);
             --text-pure: #ffffff;
-            --text-gray: #b0b0b0;
+            --text-gray: #a1a1aa;
             --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-border-strong: rgba(255, 255, 255, 0.15);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        /* --- RESET E BASES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body { 
+            font-family: 'Inter', sans-serif; 
             background-color: var(--bg-deep);
             color: var(--text-pure); 
             line-height: 1.6;
             overflow-x: hidden;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* --- FUNDO DINÂMICO --- */
         .master-bg {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.95) 100%),
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background: linear-gradient(180deg, rgba(5,5,5,0.3) 0%, rgba(5,5,5,1) 90%),
                         url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             z-index: -2;
         }
 
-        /* --- BARRA DE NAVEGAÇÃO (ESTILO APPLE/NETFLIX) --- */
+        /* --- NAVBAR --- */
         #navbar {
             position: fixed;
             top: 0; width: 100%;
-            padding: 20px 6%;
+            padding: 24px 6%;
             display: flex;
             align-items: center;
             justify-content: space-between;
             z-index: 1000;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background: linear-gradient(to bottom, rgba(5,5,5,0.9), transparent);
         }
 
         #navbar.scrolled {
-            background: rgba(10, 10, 12, 0.85);
-            backdrop-filter: blur(20px);
-            padding: 15px 6%;
+            background: rgba(10, 10, 12, 0.75);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            padding: 16px 6%;
             border-bottom: 1px solid var(--glass-border);
         }
 
         .nav-logo {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: -1px;
-            color: var(--primary);
+            letter-spacing: -0.5px;
+            color: var(--text-pure);
+        }
+        
+        .nav-logo span { color: var(--primary); }
+
+        .nav-subtitle {
+            font-weight: 800; 
+            font-size: 0.65rem; 
+            letter-spacing: 4px; 
+            color: var(--text-gray);
+            text-transform: uppercase;
             opacity: 0;
             transform: translateY(-10px);
             transition: 0.4s;
         }
 
-        #navbar.scrolled .nav-logo { opacity: 1; transform: translateY(0); }
+        #navbar.scrolled .nav-subtitle { opacity: 1; transform: translateY(0); color: var(--primary); }
 
-        /* --- CAPA CINEMATOGRÁFICA --- */
+        /* --- HERO SECTION --- */
         .hero {
             position: relative;
-            height: 90vh;
+            min-height: 90vh;
             display: flex;
             align-items: center;
             padding: 0 8%;
-            /* Camada para a sua foto */
-            background: linear-gradient(to right, var(--bg-deep) 20%, transparent 100%), url('image.png');
+            /* Ajuste 'image.png' para a foto real com fundo transparente */
+            background: linear-gradient(90deg, var(--bg-deep) 10%, rgba(5,5,5,0.8) 50%, transparent 100%), url('image.png');
             background-size: cover;
-            background-position: center 20%;
+            background-position: right bottom;
+            background-repeat: no-repeat;
         }
 
-        .hero-content { max-width: 700px; z-index: 2; }
-        .hero-content h1 { 
-            font-size: clamp(3.5rem, 10vw, 6.5rem); 
+        .hero-content { 
+            max-width: 700px; 
+            z-index: 2; 
+        }
+
+        .hero-title { 
+            font-size: clamp(4rem, 8vw, 7rem); 
             font-weight: 900; 
-            line-height: 0.85; 
-            margin-bottom: 25px;
-            letter-spacing: -3px;
+            line-height: 0.9; 
+            margin-bottom: 24px;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            animation: fadeInUp 1s cubic-bezier(0.165, 0.84, 0.44, 1) both;
         }
         
-        .hero-content p { 
-            font-size: 1.2rem; 
+        .hero-subtitle { 
+            font-size: 1.1rem; 
             color: var(--text-gray); 
-            max-width: 450px; 
-            border-left: 3px solid var(--primary);
-            padding-left: 20px;
+            max-width: 480px; 
+            border-left: 2px solid var(--primary);
+            padding-left: 24px;
+            font-weight: 400;
+            animation: fadeInUp 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s both;
         }
+        
+        .hero-subtitle strong { color: var(--text-pure); font-weight: 600; }
 
-        /* --- CONTEÚDO FLUIDO (SEM BARRAS PRETAS) --- */
+        /* --- ESTRUTURA PRINCIPAL --- */
         .main-wrapper {
             position: relative;
-            background: linear-gradient(to bottom, transparent, var(--bg-deep) 10%);
-            margin-top: -10vh;
+            background: linear-gradient(180deg, transparent 0%, var(--bg-deep) 15%);
+            margin-top: -15vh;
             padding-bottom: 150px;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 100px 6%; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 120px 6% 40px; }
 
-        /* --- SOBRE (ESTILO DOCUMENTÁRIO) --- */
+        /* --- SOBRE --- */
         .about-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 80px;
-            margin-bottom: 150px;
-            align-items: flex-start;
+            margin-bottom: 120px;
+            align-items: center;
         }
 
-        .about-title { font-size: 0.8rem; font-weight: 800; color: var(--primary); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; }
-        .about-text h2 { font-size: 3rem; font-weight: 800; margin-bottom: 30px; line-height: 1.1; }
-        .about-text p { font-size: 1.15rem; color: var(--text-gray); margin-bottom: 25px; text-align: justify; }
+        .about-label { 
+            font-size: 0.75rem; 
+            font-weight: 800; 
+            color: var(--primary); 
+            letter-spacing: 3px; 
+            text-transform: uppercase; 
+            margin-bottom: 16px; 
+        }
 
-        /* --- PLANOS (ESTILO STREAMING CARDS) --- */
-        .section-header { margin-bottom: 60px; }
-        .section-header h2 { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
+        .about-text h2 { 
+            font-size: clamp(2rem, 4vw, 3rem); 
+            font-weight: 800; 
+            margin-bottom: 24px; 
+            line-height: 1.1; 
+            letter-spacing: -1px;
+        }
+
+        .about-text p { 
+            font-size: 1.1rem; 
+            color: var(--text-gray); 
+            margin-bottom: 20px; 
+        }
+
+        .about-box {
+            background: var(--bg-surface);
+            padding: 48px; 
+            border-radius: 24px; 
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .about-box h3 { margin-bottom: 24px; font-weight: 800; color: var(--text-pure); font-size: 1.5rem; letter-spacing: -0.5px; }
+        .about-list { list-style: none; color: var(--text-gray); }
+        .about-list li { margin-bottom: 16px; display: flex; align-items: center; font-size: 1.05rem; }
+        .about-list li::before { content: ""; display: inline-block; width: 6px; height: 6px; background: var(--primary); border-radius: 50%; margin-right: 16px; }
+
+        /* --- PLANOS --- */
+        .section-header { margin-bottom: 64px; text-align: left; }
+        .section-header h2 { font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 900; letter-spacing: -1px; }
 
         .plans-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
         }
 
         .plan-label { position: relative; cursor: pointer; display: block; height: 100%; }
@@ -139,47 +205,105 @@
         .plan-card {
             background: var(--bg-surface);
             border: 1px solid var(--glass-border);
-            padding: 40px 30px;
+            padding: 40px 32px;
             border-radius: 24px;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            backdrop-filter: blur(15px);
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             display: flex;
             flex-direction: column;
             height: 100%;
+            position: relative;
+            overflow: hidden;
         }
 
         .plan-label:hover .plan-card {
-            transform: scale(1.03);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            background: var(--bg-surface-hover);
+            border-color: var(--glass-border-strong);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
         .plan-input:checked + .plan-card {
             border-color: var(--primary);
-            background: rgba(0, 113, 255, 0.08);
-            box-shadow: 0 0 30px var(--primary-glow);
+            background: rgba(0, 113, 255, 0.05);
+            box-shadow: 0 0 0 1px var(--primary), 0 20px 40px rgba(0,0,0,0.6), inset 0 0 80px rgba(0, 113, 255, 0.05);
+            transform: translateY(-8px);
         }
 
-        .plan-card h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--text-pure); }
-        .plan-price { font-size: 2.5rem; font-weight: 900; margin-bottom: 25px; color: var(--text-pure); }
-        .plan-price span { font-size: 0.9rem; color: var(--text-gray); font-weight: 400; }
+        /* Checkmark Icon Animation */
+        .plan-card::after {
+            content: '✓';
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 28px;
+            height: 28px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 900;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-        .plan-features { list-style: none; flex-grow: 1; margin-bottom: 30px; }
+        .plan-input:checked + .plan-card::after { opacity: 1; transform: scale(1); }
+
+        .plan-card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 12px; color: var(--text-pure); }
+        .plan-price { font-size: 2.5rem; font-weight: 900; margin-bottom: 32px; color: var(--text-pure); letter-spacing: -1px; display: flex; align-items: baseline; gap: 4px;}
+        .plan-price span { font-size: 0.85rem; color: var(--text-gray); font-weight: 500; letter-spacing: 0; }
+
+        .plan-features { list-style: none; flex-grow: 1; margin-bottom: 24px; }
         .plan-features li { 
-            font-size: 0.95rem; color: var(--text-gray); margin-bottom: 12px; 
-            display: flex; align-items: flex-start;
+            font-size: 0.95rem; color: var(--text-gray); margin-bottom: 14px; 
+            display: flex; align-items: center;
         }
         .plan-features li::before { 
-            content: "✓"; color: var(--primary); margin-right: 12px; font-weight: 900; 
+            content: "•"; color: var(--primary); margin-right: 12px; font-weight: 900; font-size: 1.2rem;
         }
 
-        /* CARD ESPECIAL */
-        .card-dupla { border: 1px solid rgba(255, 204, 0, 0.2); }
-        .plan-input:checked + .card-dupla { border-color: var(--accent); background: rgba(255, 204, 0, 0.05); box-shadow: 0 0 30px rgba(255, 204, 0, 0.2); }
-        .card-dupla h3 { color: var(--accent); }
+        /* CARD ESPECIAL - DUPLA */
+        .plan-badge {
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: #000;
+            font-size: 0.65rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 16px;
+            border-radius: 0 0 8px 8px;
+        }
 
-        /* --- BARRA FIXA WHATSAPP (AÇÃO FINAL) --- */
+        .plan-input:checked + .card-dupla { 
+            border-color: var(--accent); 
+            background: rgba(245, 197, 24, 0.05); 
+            box-shadow: 0 0 0 1px var(--accent), 0 20px 40px rgba(0,0,0,0.6); 
+        }
+        .plan-input:checked + .card-dupla::after { background: var(--accent); color: #000; }
+        .plan-input:checked + .card-dupla li::before { color: var(--accent); }
+
+        /* --- INFO BOX --- */
+        .rules-grid {
+            margin-top: 80px;
+            padding: 40px;
+            background: var(--bg-surface);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+        .rules-grid h4 { color: var(--text-gray); text-transform: uppercase; font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 24px; }
+        .rules-grid p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 12px; display: flex; align-items: flex-start; }
+        .rules-grid p::before { content: "—"; margin-right: 12px; color: var(--glass-border-strong); }
+
+        /* --- CTA FLUTUANTE --- */
         .sticky-action {
             position: fixed;
             bottom: 40px;
@@ -189,52 +313,85 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            padding: 0 20px;
+            padding: 0 24px;
+            pointer-events: none; /* Deixa clicar apenas no botão */
         }
 
         .btn-whatsapp {
+            pointer-events: auto;
             background: var(--primary);
             color: white;
             text-decoration: none;
-            padding: 22px 50px;
+            padding: 18px 48px;
             border-radius: 100px;
             font-weight: 800;
-            font-size: 1.1rem;
+            font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 15px 40px var(--primary-glow);
-            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px var(--primary-glow), inset 0 1px 0 rgba(255,255,255,0.2);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-whatsapp::before {
+            content: '';
+            width: 12px; height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(255,255,255,0.8);
+            animation: pulseDot 2s infinite;
         }
 
         .btn-whatsapp:hover {
-            transform: translateY(-5px) scale(1.05);
-            background: #1a7fff;
-            box-shadow: 0 20px 50px rgba(0, 113, 255, 0.6);
+            transform: translateY(-4px) scale(1.02);
+            background: #005bb5;
+            box-shadow: 0 20px 40px rgba(0, 113, 255, 0.5);
         }
 
-        /* --- INFO BOX --- */
-        .rules-grid {
-            margin-top: 100px;
-            padding: 40px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 30px;
-            border: 1px solid var(--glass-border);
+        /* Estado ativo do botão (verde WhatsApp) */
+        .btn-whatsapp.active-green {
+            background: #25d366;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            border-color: #25d366;
         }
-        .rules-grid h4 { color: #ff4747; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 3px; margin-bottom: 20px; }
-        .rules-grid p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 12px; }
+        .btn-whatsapp.active-green:hover {
+            background: #1ebc59;
+            box-shadow: 0 20px 40px rgba(37, 211, 102, 0.5);
+        }
 
+        /* --- FOOTER --- */
+        footer {
+            padding: 80px 6% 160px; 
+            text-align: center; 
+            color: var(--text-gray);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--glass-border);
+        }
+        
+        footer p:first-child { font-weight: 800; letter-spacing: 2px; color: var(--text-pure); margin-bottom: 8px;}
+
+        /* --- ANIMAÇÕES --- */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes pulseDot {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
 
+        /* --- RESPONSIVIDADE --- */
         @media (max-width: 900px) {
-            .about-section { grid-template-columns: 1fr; gap: 40px; }
-            .hero-content h1 { font-size: 4rem; }
-            .hero { background-position: 70% center; }
+            .about-section { grid-template-columns: 1fr; gap: 48px; }
+            .hero { min-height: 80vh; background-position: 60% bottom; padding-top: 80px; }
+            .hero-content { background: rgba(5,5,5,0.5); padding: 24px; border-radius: 16px; backdrop-filter: blur(5px); }
+            .about-box { padding: 32px; }
+            .btn-whatsapp { padding: 16px 32px; width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -243,16 +400,15 @@
     <div class="master-bg"></div>
 
     <nav id="navbar">
-        <div class="nav-logo">Paulo Fernando</div>
-        <div style="font-weight: 800; font-size: 0.65rem; letter-spacing: 4px; color: var(--primary);">ESTRATÉGIA & PERFORMANCE</div>
+        <div class="nav-logo">Paulo <span>Fernando</span></div>
+        <div class="nav-subtitle">Estratégia & Performance</div>
     </nav>
 
     <section class="hero">
         <div class="hero-content">
-            <h1 style="animation: fadeInUp 1s ease both;">TREINO É<br>CIÊNCIA.</h1>
-            <p style="animation: fadeInUp 1s ease 0.2s both;">
-                Especialista pela <strong>Unicid</strong> (Universidade Cidade de São Paulo). 
-                Transformo evidência científica em resultados físicos reais desde 2014.
+            <h1 class="hero-title">Treino é<br>Ciência.</h1>
+            <p class="hero-subtitle">
+                Especialista pela <strong>Unicid</strong>. Transformo evidência científica em resultados físicos reais desde 2014.
             </p>
         </div>
     </section>
@@ -262,18 +418,18 @@
             
             <section class="about-section">
                 <div class="about-text">
-                    <div class="about-title">A Metodologia</div>
+                    <div class="about-label">A Metodologia</div>
                     <h2>Sem invenções,<br>apenas o que funciona.</h2>
                     <p>Minha trajetória começou em 2014, unindo a paixão pela musculação ao rigor acadêmico da Unicid. Hoje, minha missão é entregar uma consultoria que respeite sua individualidade biológica e sua rotina.</p>
-                    <p>O foco é a <strong>Periodização Inteligente</strong>: saber exatamente quando progredir e como ajustar cada variável do seu treino.</p>
+                    <p>O foco é a <strong>Periodização Inteligente</strong>: saber exatamente quando progredir e como ajustar cada variável do seu treino para maximizar seus resultados.</p>
                 </div>
-                <div style="background: rgba(255,255,255,0.03); padding: 40px; border-radius: 32px; border: 1px solid var(--glass-border);">
-                    <h3 style="margin-bottom: 20px; font-weight: 700; color: var(--primary);">Formação & Base</h3>
-                    <ul style="list-style: none; color: var(--text-gray);">
-                        <li style="margin-bottom: 15px;">• Bacharelado em Ed. Física (Unicid)</li>
-                        <li style="margin-bottom: 15px;">• Especialista em Treino de Força</li>
-                        <li style="margin-bottom: 15px;">• Análise Biomecânica de Movimento</li>
-                        <li>• +10 anos de experiência prática</li>
+                <div class="about-box">
+                    <h3>Formação & Base</h3>
+                    <ul class="about-list">
+                        <li>Bacharelado em Ed. Física (Unicid)</li>
+                        <li>Especialista em Treino de Força</li>
+                        <li>Análise Biomecânica de Movimento</li>
+                        <li>+10 anos de experiência prática</li>
                     </ul>
                 </div>
             </section>
@@ -287,7 +443,7 @@
                     <input type="radio" name="plan" class="plan-input" value="Planilha de Treinamento" onchange="selecionar(this.value)">
                     <div class="plan-card">
                         <h3>Planilha de Treino</h3>
-                        <div class="plan-price">R$ 90 <span>/ bimestral</span></div>
+                        <div class="plan-price">R$ 90<span>/bimestre</span></div>
                         <ul class="plan-features">
                             <li>100% Personalizada</li>
                             <li>Planejada para sua rotina</li>
@@ -301,7 +457,7 @@
                     <input type="radio" name="plan" class="plan-input" value="Diária de Personal" onchange="selecionar(this.value)">
                     <div class="plan-card">
                         <h3>Diária de Personal</h3>
-                        <div class="plan-price">R$ 80 <span>/ sessão</span></div>
+                        <div class="plan-price">R$ 80<span>/sessão</span></div>
                         <ul class="plan-features">
                             <li>Até 1h30 de duração</li>
                             <li>Acompanhamento presencial</li>
@@ -315,7 +471,7 @@
                     <input type="radio" name="plan" class="plan-input" value="Acompanhamento Mensal" onchange="selecionar(this.value)">
                     <div class="plan-card">
                         <h3>Programa Mensal</h3>
-                        <div class="plan-price">R$ 560 <span>/ inicial</span></div>
+                        <div class="plan-price">R$ 560<span>/inicial</span></div>
                         <ul class="plan-features">
                             <li>Aulas particulares de 1h</li>
                             <li>Opções de 2x ou 3x na semana</li>
@@ -328,10 +484,11 @@
                 <label class="plan-label">
                     <input type="radio" name="plan" class="plan-input" value="Treino em Dupla" onchange="selecionar(this.value)">
                     <div class="plan-card card-dupla">
+                        <div class="plan-badge">Custo-Benefício</div>
                         <h3>Oferta em Dupla</h3>
-                        <div class="plan-price">R$ 650 <span>/ mensal</span></div>
+                        <div class="plan-price">R$ 650<span>/mensal</span></div>
                         <ul class="plan-features">
-                            <li>Treine com um parceiro(a)</li>
+                            <li>Treine com parceiro(a)</li>
                             <li>2x/sem: R$ 325 por pessoa</li>
                             <li>3x/sem: R$ 450 por pessoa</li>
                             <li>Economia com mesma qualidade</li>
@@ -342,9 +499,9 @@
 
             <div class="rules-grid">
                 <h4>Condições de Treinamento</h4>
-                <p>• Faltas sem aviso prévio são consideradas como aula realizada.</p>
-                <p>• Reposições devem ser agendadas dentro da mesma semana.</p>
-                <p>• Mensalidade da academia por conta do aluno (Isento na rede Motion Fit).</p>
+                <p>Faltas sem aviso prévio são consideradas como aula realizada.</p>
+                <p>Reposições devem ser agendadas dentro da mesma semana.</p>
+                <p>Mensalidade da academia por conta do aluno.</p>
             </div>
 
         </div>
@@ -356,32 +513,31 @@
         </a>
     </div>
 
-    <footer style="padding: 100px 6% 180px; text-align: center; opacity: 0.5; font-size: 0.8rem;">
-        <p>PAULO FERNANDO © 2024 | DESIGNER DE PERFORMANCE</p>
-        <p style="margin-top: 10px;">Universidade Cidade de São Paulo (UNICID)</p>
+    <footer>
+        <p>PAULO FERNANDO © 2024</p>
+        <p>Designer de Performance | @Paulofernando_personal</p>
     </footer>
 
     <script>
-        // Efeito Navbar
+        // Efeito Navbar de Vidro
         window.onscroll = function() {
-            var nav = document.getElementById('navbar');
-            if (window.scrollY > 120) {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 80) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
             }
         };
 
-        // Seleção de Plano e Atualização do Botão
+        // Seleção de Plano e Atualização Elegante do Botão
         function selecionar(plano) {
             const tel = "5511964643494";
             const msg = `Olá Paulo! Selecionei o plano "${plano}" no site e quero começar meu treinamento.`;
-            document.getElementById('link-whats').href = `https://wa.me/${tel}?text=${encodeURIComponent(msg)}`;
-            
-            // Feedback tátil visual
             const btn = document.getElementById('link-whats');
-            btn.style.background = "#25d366"; // Muda para verde WhatsApp ao selecionar
-            btn.innerText = "Enviar Plano Escolhido";
+            
+            btn.href = `https://wa.me/${tel}?text=${encodeURIComponent(msg)}`;
+            btn.classList.add('active-green');
+            btn.innerHTML = `Confirmar ${plano}`;
         }
     </script>
 </body>
