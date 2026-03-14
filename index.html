@@ -30,7 +30,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- FUNDO DE VÍDEO (CORRIGIDO) --- */
+        /* --- FUNDO DE VÍDEO --- */
         .video-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -39,7 +39,6 @@
             background-color: #000;
         }
 
-        /* O 'poster' garante que algo apareça se o vídeo falhar */
         .video-container video {
             width: 100%; height: 100%;
             object-fit: cover;
@@ -87,7 +86,7 @@
         .hero-title { 
             font-size: clamp(3.5rem, 10vw, 8rem); 
             font-weight: 900; 
-            line-height: 1.1; /* Ajustado para não encavalar */
+            line-height: 1.15; 
             text-transform: uppercase;
             letter-spacing: -2px;
             margin-bottom: 25px;
@@ -100,7 +99,11 @@
         }
 
         /* --- CONTEÚDO --- */
-        .wrapper { position: relative; z-index: 1; padding-bottom: 150px; }
+        .wrapper { 
+            position: relative; 
+            z-index: 1; 
+            padding-bottom: 120px; /* Espaço para a barra fixa não cobrir o texto final */
+        }
         .container { max-width: 1200px; margin: 0 auto; padding: 100px 6%; }
 
         /* SOBRE */
@@ -144,34 +147,7 @@
         .features li { margin-bottom: 10px; }
         .features li::before { content: "✓ "; color: var(--primary); font-weight: 900; }
 
-        /* WHATSAPP */
-        .cta-container {
-            position: fixed; bottom: 40px; left: 0; width: 100%;
-            display: flex; justify-content: center; z-index: 2000;
-        }
-
-        .btn-whats {
-            background: var(--primary); color: #fff; text-decoration: none;
-            padding: 20px 45px; border-radius: 100px;
-            font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
-            box-shadow: 0 10px 30px var(--primary-glow);
-            transition: 0.3s; animation: pulse 2s infinite;
-        }
-
-        .btn-whats.selected { background: #25d366; box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); animation: none; }
-
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 10px 30px var(--primary-glow); }
-            50% { transform: scale(1.03); box-shadow: 0 15px 45px var(--primary-glow); }
-            100% { transform: scale(1); box-shadow: 0 10px 30px var(--primary-glow); }
-        }
-
-        @media (max-width: 800px) {
-            .about { grid-template-columns: 1fr; }
-            .hero { background-position: right 30% bottom; }
-            .hero-title { line-height: 1.2; font-size: 3.5rem; }
-        }
-                /* --- INFO BOX --- */
+        /* REGRAS */
         .rules-grid {
             margin-top: 80px;
             padding: 40px;
@@ -182,7 +158,51 @@
         }
         .rules-grid h4 { color: var(--text-gray); text-transform: uppercase; font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 24px; }
         .rules-grid p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 12px; display: flex; align-items: flex-start; }
-        .rules-grid p::before { content: "—"; margin-right: 12px; color: var(--glass-border-strong); }
+        .rules-grid p::before { content: "—"; margin-right: 12px; color: var(--primary); }
+
+        /* --- BOTÃO WHATSAPP FIXO NO FIM (ACTION BAR) --- */
+        .cta-container {
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(5,5,5,1) 60%, rgba(5,5,5,0.8));
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            display: flex; 
+            justify-content: center; 
+            z-index: 2000;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .btn-whats {
+            width: 100%;
+            max-width: 500px;
+            background: var(--primary); 
+            color: #fff; 
+            text-decoration: none;
+            padding: 18px; 
+            border-radius: 12px; /* Estilo mais moderno para barra inferior */
+            font-weight: 800; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            text-align: center;
+            box-shadow: 0 10px 30px var(--primary-glow);
+            transition: 0.3s;
+        }
+
+        .btn-whats.selected { 
+            background: #25d366; 
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); 
+        }
+
+        @media (max-width: 800px) {
+            .about { grid-template-columns: 1fr; }
+            .hero { background-position: right 30% bottom; }
+            .hero-title { line-height: 1.2; font-size: 3.5rem; }
+            .cta-container { padding: 15px; } /* Menos espaço em telas pequenas */
+        }
     </style>
 </head>
 <body>
@@ -242,10 +262,9 @@
                         <h3>Diária de Personal</h3>
                         <div class="price">R$ 80<span> / sessão</span></div>
                         <ul class="features">
-                            <li>Até 1h30 de duração</li>
+                           <li>Até 1h30 de duração</li>
                             <li>Correção técnica especializada</li>
                             <li>Perfeito para você que acha que parou no tempo, tem medo de realizar os movimentos de forma incorreta ou não se sente confiante para aumentar a sua carga máxima</li>
-
                         </ul>
                     </div>
                 </label>
@@ -279,7 +298,7 @@
             
             <div class="rules-grid">
                 <h4>Condições de Treinamento</h4>
-                <p><strong>TODOS OS PAGAMENTOS DEVEM SER FEITOS NO PIX/DINHEIRO</strong></p>
+                <p><strong>PAGAMENTO: PIX OU DINHEIRO</strong></p>
                 <p>Faltas sem aviso prévio são consideradas como aula realizada.</p>
                 <p>Reposições devem ser agendadas dentro da mesma semana.</p>
                 <p>Mensalidade da academia por conta do aluno.</p>
