@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paulo Fernando | Consultoria Elite</title>
+    <title>Paulo Fernando | Consultoria de Elite</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0071ff;
             --primary-glow: rgba(0, 113, 255, 0.4);
             --accent: #f5c518;
             --accent-glow: rgba(245, 197, 24, 0.3);
-            --bg-deep: #050505;
-            --bg-surface: rgba(20, 20, 22, 0.6);
-            --bg-surface-hover: rgba(30, 30, 35, 0.8);
+            --bg-deep: #030303;
+            --bg-surface: rgba(15, 15, 18, 0.5);
+            --bg-surface-hover: rgba(25, 25, 30, 0.7);
             --text-pure: #ffffff;
             --text-gray: #a1a1aa;
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-border-strong: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --glass-border-strong: rgba(255, 255, 255, 0.12);
         }
 
         /* --- RESET E BASES --- */
@@ -36,15 +36,27 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* --- FUNDO DINÂMICO --- */
+        /* --- FUNDO DINÂMICO (VÍDEO) --- */
         .master-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100vh;
-            background: linear-gradient(180deg, rgba(5,5,5,0.3) 0%, rgba(5,5,5,1) 90%),
-                        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
             z-index: -2;
+            overflow: hidden;
+        }
+
+        .master-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) brightness(30%); /* Escurece e tira a cor para foco no conteúdo */
+        }
+
+        /* Camada de gradiente sobre o vídeo para garantir legibilidade */
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background: linear-gradient(180deg, rgba(3,3,3,0.2) 0%, rgba(3,3,3,0.8) 50%, rgba(3,3,3,1) 100%);
+            z-index: -1;
         }
 
         /* --- NAVBAR --- */
@@ -57,13 +69,13 @@
             justify-content: space-between;
             z-index: 1000;
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            background: linear-gradient(to bottom, rgba(5,5,5,0.9), transparent);
+            background: linear-gradient(to bottom, rgba(3,3,3,0.9), transparent);
         }
 
         #navbar.scrolled {
-            background: rgba(10, 10, 12, 0.75);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
+            background: rgba(10, 10, 12, 0.7);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             padding: 16px 6%;
             border-bottom: 1px solid var(--glass-border);
         }
@@ -94,60 +106,79 @@
         /* --- HERO SECTION --- */
         .hero {
             position: relative;
-            min-height: 90vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             padding: 0 8%;
-            /* Ajuste 'image.png' para a foto real com fundo transparente */
-            background: linear-gradient(90deg, var(--bg-deep) 10%, rgba(5,5,5,0.8) 50%, transparent 100%), url('image.png');
-            background-size: cover;
-            background-position: right bottom;
+            /* A foto do Paulo Fernando deve ter fundo transparente */
+            background: url('image.png');
+            background-size: contain;
+            background-position: calc(100% - 100px) bottom;
             background-repeat: no-repeat;
+            z-index: 1;
         }
 
         .hero-content { 
-            max-width: 700px; 
+            max-width: 800px; 
             z-index: 2; 
         }
 
         .hero-title { 
-            font-size: clamp(4rem, 8vw, 7rem); 
+            font-size: clamp(4.5rem, 12vw, 10rem); 
             font-weight: 900; 
-            line-height: 0.9; 
+            line-height: 0.8; 
             margin-bottom: 24px;
-            letter-spacing: -2px;
+            letter-spacing: -4px;
             text-transform: uppercase;
-            animation: fadeInUp 1s cubic-bezier(0.165, 0.84, 0.44, 1) both;
+            animation: fadeInUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) both;
+            margin-left: -10px; /* Alinha o peso visual da fonte */
         }
         
+        .hero-title span { color: var(--primary); }
+
         .hero-subtitle { 
-            font-size: 1.1rem; 
+            font-size: 1.15rem; 
             color: var(--text-gray); 
-            max-width: 480px; 
+            max-width: 500px; 
             border-left: 2px solid var(--primary);
-            padding-left: 24px;
+            padding-left: 28px;
             font-weight: 400;
-            animation: fadeInUp 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s both;
+            animation: fadeInUp 1.2s cubic-bezier(0.165, 0.84, 0.44, 1) 0.3s both;
         }
         
         .hero-subtitle strong { color: var(--text-pure); font-weight: 600; }
 
-        /* --- ESTRUTURA PRINCIPAL --- */
+        /* --- ESTRUTURA PRINCIPAL COM TEXTO DE FUNDO --- */
         .main-wrapper {
             position: relative;
-            background: linear-gradient(180deg, transparent 0%, var(--bg-deep) 15%);
-            margin-top: -15vh;
-            padding-bottom: 150px;
+            background: linear-gradient(180deg, transparent 0%, var(--bg-deep) 10%);
+            margin-top: -10vh;
+            padding-bottom: 180px;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 120px 6% 40px; }
+        /* Texto de Fundo Gigante */
+        .main-wrapper::before {
+            content: "PERFORMANCE";
+            position: absolute;
+            top: 15vh;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 25vw;
+            font-weight: 900;
+            color: rgba(255,255,255,0.02);
+            letter-spacing: -10px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container { max-width: 1300px; margin: 0 auto; padding: 120px 6% 40px; }
 
         /* --- SOBRE --- */
         .about-section {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            margin-bottom: 120px;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 100px;
+            margin-bottom: 140px;
             align-items: center;
         }
 
@@ -155,48 +186,49 @@
             font-size: 0.75rem; 
             font-weight: 800; 
             color: var(--primary); 
-            letter-spacing: 3px; 
+            letter-spacing: 4px; 
             text-transform: uppercase; 
             margin-bottom: 16px; 
         }
 
         .about-text h2 { 
-            font-size: clamp(2rem, 4vw, 3rem); 
-            font-weight: 800; 
+            font-size: clamp(2.5rem, 5vw, 3.5rem); 
+            font-weight: 900; 
             margin-bottom: 24px; 
-            line-height: 1.1; 
-            letter-spacing: -1px;
+            line-height: 1.05; 
+            letter-spacing: -1.5px;
         }
 
         .about-text p { 
-            font-size: 1.1rem; 
+            font-size: 1.15rem; 
             color: var(--text-gray); 
-            margin-bottom: 20px; 
+            margin-bottom: 24px; 
         }
 
         .about-box {
             background: var(--bg-surface);
-            padding: 48px; 
-            border-radius: 24px; 
+            padding: 56px; 
+            border-radius: 28px; 
             border: 1px solid var(--glass-border);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
         }
 
-        .about-box h3 { margin-bottom: 24px; font-weight: 800; color: var(--text-pure); font-size: 1.5rem; letter-spacing: -0.5px; }
+        .about-box h3 { margin-bottom: 28px; font-weight: 800; color: var(--text-pure); font-size: 1.6rem; letter-spacing: -0.5px; }
         .about-list { list-style: none; color: var(--text-gray); }
-        .about-list li { margin-bottom: 16px; display: flex; align-items: center; font-size: 1.05rem; }
-        .about-list li::before { content: ""; display: inline-block; width: 6px; height: 6px; background: var(--primary); border-radius: 50%; margin-right: 16px; }
+        .about-list li { margin-bottom: 18px; display: flex; align-items: center; font-size: 1.1rem; }
+        .about-list li::before { content: ""; display: inline-block; width: 7px; height: 7px; background: var(--primary); border-radius: 50%; margin-right: 18px; }
 
         /* --- PLANOS --- */
-        .section-header { margin-bottom: 64px; text-align: left; }
-        .section-header h2 { font-size: clamp(2rem, 4vw, 2.5rem); font-weight: 900; letter-spacing: -1px; }
+        .section-header { margin-bottom: 72px; text-align: left; max-width: 600px;}
+        .section-header h2 { font-size: clamp(2.5rem, 5vw, 3rem); font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; }
+        .section-header p { color: var(--text-gray); margin-top: 16px; font-size: 1.1rem; }
 
         .plans-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
         }
 
         .plan-label { position: relative; cursor: pointer; display: block; height: 100%; }
@@ -205,9 +237,9 @@
         .plan-card {
             background: var(--bg-surface);
             border: 1px solid var(--glass-border);
-            padding: 40px 32px;
-            border-radius: 24px;
-            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            padding: 48px 36px;
+            border-radius: 28px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             display: flex;
@@ -220,93 +252,95 @@
         .plan-label:hover .plan-card {
             background: var(--bg-surface-hover);
             border-color: var(--glass-border-strong);
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 70px rgba(0,0,0,0.5);
         }
 
         .plan-input:checked + .plan-card {
             border-color: var(--primary);
-            background: rgba(0, 113, 255, 0.05);
-            box-shadow: 0 0 0 1px var(--primary), 0 20px 40px rgba(0,0,0,0.6), inset 0 0 80px rgba(0, 113, 255, 0.05);
-            transform: translateY(-8px);
+            background: rgba(0, 113, 255, 0.04);
+            box-shadow: 0 0 0 1px var(--primary), 0 30px 70px rgba(0,0,0,0.7), inset 0 0 80px rgba(0, 113, 255, 0.05);
+            transform: translateY(-10px) scale(1.02);
         }
 
         /* Checkmark Icon Animation */
         .plan-card::after {
             content: '✓';
             position: absolute;
-            top: 24px;
-            right: 24px;
-            width: 28px;
-            height: 28px;
+            top: 28px;
+            right: 28px;
+            width: 32px;
+            height: 32px;
             background: var(--primary);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 900;
             opacity: 0;
             transform: scale(0.5);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .plan-input:checked + .plan-card::after { opacity: 1; transform: scale(1); }
 
-        .plan-card h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 12px; color: var(--text-pure); }
-        .plan-price { font-size: 2.5rem; font-weight: 900; margin-bottom: 32px; color: var(--text-pure); letter-spacing: -1px; display: flex; align-items: baseline; gap: 4px;}
-        .plan-price span { font-size: 0.85rem; color: var(--text-gray); font-weight: 500; letter-spacing: 0; }
+        .plan-card h3 { font-size: 1.35rem; font-weight: 700; margin-bottom: 12px; color: var(--text-pure); letter-spacing: -0.5px; }
+        .plan-price { font-size: 2.8rem; font-weight: 900; margin-bottom: 36px; color: var(--text-pure); letter-spacing: -1.5px; display: flex; align-items: baseline; gap: 6px;}
+        .plan-price span { font-size: 0.9rem; color: var(--text-gray); font-weight: 500; letter-spacing: 0; }
 
-        .plan-features { list-style: none; flex-grow: 1; margin-bottom: 24px; }
+        .plan-features { list-style: none; flex-grow: 1; margin-bottom: 28px; }
         .plan-features li { 
-            font-size: 0.95rem; color: var(--text-gray); margin-bottom: 14px; 
-            display: flex; align-items: center;
+            font-size: 1rem; color: var(--text-gray); margin-bottom: 16px; 
+            display: flex; align-items: flex-start;
         }
         .plan-features li::before { 
-            content: "•"; color: var(--primary); margin-right: 12px; font-weight: 900; font-size: 1.2rem;
+            content: "•"; color: var(--primary); margin-right: 14px; font-weight: 900; font-size: 1.3rem; line-height: 1;
         }
 
         /* CARD ESPECIAL - DUPLA */
         .plan-badge {
             position: absolute;
-            top: 0; left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent);
-            color: #000;
+            top: 16px; left: 36px;
+            background: rgba(245, 197, 24, 0.1);
+            color: var(--accent);
             font-size: 0.65rem;
-            font-weight: 900;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 4px 16px;
-            border-radius: 0 0 8px 8px;
+            letter-spacing: 1.5px;
+            padding: 5px 12px;
+            border-radius: 100px;
+            border: 1px solid rgba(245, 197, 24, 0.2);
         }
+        
+        .card-dupla { padding-top: 60px; }
 
         .plan-input:checked + .card-dupla { 
             border-color: var(--accent); 
-            background: rgba(245, 197, 24, 0.05); 
-            box-shadow: 0 0 0 1px var(--accent), 0 20px 40px rgba(0,0,0,0.6); 
+            background: rgba(245, 197, 24, 0.04); 
+            box-shadow: 0 0 0 1px var(--accent), 0 30px 70px rgba(0,0,0,0.7); 
         }
         .plan-input:checked + .card-dupla::after { background: var(--accent); color: #000; }
         .plan-input:checked + .card-dupla li::before { color: var(--accent); }
 
         /* --- INFO BOX --- */
         .rules-grid {
-            margin-top: 80px;
-            padding: 40px;
+            margin-top: 100px;
+            padding: 48px;
             background: var(--bg-surface);
-            border-radius: 24px;
+            border-radius: 28px;
             border: 1px solid var(--glass-border);
             backdrop-filter: blur(10px);
         }
-        .rules-grid h4 { color: var(--text-gray); text-transform: uppercase; font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; margin-bottom: 24px; }
-        .rules-grid p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 12px; display: flex; align-items: flex-start; }
-        .rules-grid p::before { content: "—"; margin-right: 12px; color: var(--glass-border-strong); }
+        .rules-grid h4 { color: var(--text-gray); text-transform: uppercase; font-size: 0.8rem; font-weight: 800; letter-spacing: 3px; margin-bottom: 28px; }
+        .rules-grid p { color: var(--text-gray); font-size: 1rem; margin-bottom: 14px; display: flex; align-items: flex-start; }
+        .rules-grid p::before { content: "—"; margin-right: 16px; color: var(--glass-border-strong); }
 
         /* --- CTA FLUTUANTE --- */
         .sticky-action {
             position: fixed;
-            bottom: 40px;
+            bottom: 48px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 1000;
@@ -314,7 +348,7 @@
             display: flex;
             justify-content: center;
             padding: 0 24px;
-            pointer-events: none; /* Deixa clicar apenas no botão */
+            pointer-events: none;
         }
 
         .btn-whatsapp {
@@ -322,82 +356,89 @@
             background: var(--primary);
             color: white;
             text-decoration: none;
-            padding: 18px 48px;
+            padding: 20px 56px;
             border-radius: 100px;
             font-weight: 800;
-            font-size: 1rem;
+            font-size: 1.05rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 10px 30px var(--primary-glow), inset 0 1px 0 rgba(255,255,255,0.2);
+            letter-spacing: 1.5px;
+            box-shadow: 0 15px 40px var(--primary-glow), 0 0 0 0 var(--primary-glow);
             transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             display: flex;
             align-items: center;
-            gap: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .btn-whatsapp::before {
-            content: '';
-            width: 12px; height: 12px;
-            background: #fff;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 10px rgba(255,255,255,0.8);
-            animation: pulseDot 2s infinite;
+            gap: 14px;
+            border: 1px solid rgba(255,255,255,0.08);
+            animation: pulseGlow 2.5s infinite;
         }
 
         .btn-whatsapp:hover {
-            transform: translateY(-4px) scale(1.02);
-            background: #005bb5;
-            box-shadow: 0 20px 40px rgba(0, 113, 255, 0.5);
+            transform: translateY(-5px) scale(1.03);
+            background: #0066e6;
+            box-shadow: 0 25px 50px rgba(0, 113, 255, 0.6);
         }
 
         /* Estado ativo do botão (verde WhatsApp) */
         .btn-whatsapp.active-green {
             background: #25d366;
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
             border-color: #25d366;
+            animation: none;
         }
         .btn-whatsapp.active-green:hover {
             background: #1ebc59;
-            box-shadow: 0 20px 40px rgba(37, 211, 102, 0.5);
+            box-shadow: 0 25px 50px rgba(37, 211, 102, 0.5);
         }
 
         /* --- FOOTER --- */
         footer {
-            padding: 80px 6% 160px; 
+            padding: 100px 6% 180px; 
             text-align: center; 
             color: var(--text-gray);
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             border-top: 1px solid var(--glass-border);
+            position: relative;
+            z-index: 1;
         }
         
-        footer p:first-child { font-weight: 800; letter-spacing: 2px; color: var(--text-pure); margin-bottom: 8px;}
+        footer p:first-child { font-weight: 800; letter-spacing: 2px; color: var(--text-pure); margin-bottom: 10px; text-transform: uppercase;}
 
         /* --- ANIMAÇÕES --- */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        @keyframes pulseDot {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 15px 40px var(--primary-glow), 0 0 0 0 rgba(0, 113, 255, 0); }
+            70% { box-shadow: 0 15px 40px var(--primary-glow), 0 0 0 15px rgba(0, 113, 255, 0); }
+            100% { box-shadow: 0 15px 40px var(--primary-glow), 0 0 0 0 rgba(0, 113, 255, 0); }
         }
 
         /* --- RESPONSIVIDADE --- */
-        @media (max-width: 900px) {
-            .about-section { grid-template-columns: 1fr; gap: 48px; }
-            .hero { min-height: 80vh; background-position: 60% bottom; padding-top: 80px; }
-            .hero-content { background: rgba(5,5,5,0.5); padding: 24px; border-radius: 16px; backdrop-filter: blur(5px); }
-            .about-box { padding: 32px; }
-            .btn-whatsapp { padding: 16px 32px; width: 100%; justify-content: center; }
+        @media (max-width: 1000px) {
+            .hero { background-position: 50% bottom; background-size: cover; }
+            .hero-content { background: rgba(3,3,3,0.6); padding: 32px; border-radius: 20px; backdrop-filter: blur(10px); }
+            .about-section { grid-template-columns: 1fr; gap: 60px; }
+            .about-box { padding: 40px; }
+            .main-wrapper::before { font-size: 30vw; top: 10vh; }
+        }
+        
+        @media (max-width: 600px) {
+            .hero-title { font-size: clamp(3.5rem, 15vw, 5rem); letter-spacing: -2px; }
+            .hero-subtitle { padding-left: 20px; font-size: 1rem; }
+            .container { padding-top: 100px; }
+            .btn-whatsapp { padding: 18px 40px; font-size: 1rem; width: 100%; justify-content: center; }
+            .sticky-action { bottom: 30px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="master-bg"></div>
+    <div class="master-bg">
+        <video autoplay loop muted playsinline poster="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop">
+            <source src="https://cdn.coverr.co/videos/coverr-a-man-prepares-to-lift-weights-in-a-gym-5152/1080p.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="bg-overlay"></div>
 
     <nav id="navbar">
         <div class="nav-logo">Paulo <span>Fernando</span></div>
@@ -406,7 +447,7 @@
 
     <section class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">Treino é<br>Ciência.</h1>
+            <h1 class="hero-title">Treino<span>.</span><br>Ciência<span>.</span></h1>
             <p class="hero-subtitle">
                 Especialista pela <strong>Unicid</strong>. Transformo evidência científica em resultados físicos reais desde 2014.
             </p>
@@ -421,7 +462,7 @@
                     <div class="about-label">A Metodologia</div>
                     <h2>Sem invenções,<br>apenas o que funciona.</h2>
                     <p>Minha trajetória começou em 2014, unindo a paixão pela musculação ao rigor acadêmico da Unicid. Hoje, minha missão é entregar uma consultoria que respeite sua individualidade biológica e sua rotina.</p>
-                    <p>O foco é a <strong>Periodização Inteligente</strong>: saber exatamente quando progredir e como ajustar cada variável do seu treino para maximizar seus resultados.</p>
+                    <p>O foco é a <strong>Periodização Inteligente</strong>: saber exatamente quando progredir e como ajustar cada variável do seu treino para maximizar seus resultados com segurança.</p>
                 </div>
                 <div class="about-box">
                     <h3>Formação & Base</h3>
@@ -435,7 +476,8 @@
             </section>
 
             <div class="section-header">
-                <h2>Selecione seu Plano</h2>
+                <h2>Selecione seu Plano de Elite</h2>
+                <p>Escolha a modalidade que melhor se adapta aos seus objetivos e rotina.</p>
             </div>
 
             <div class="plans-grid">
@@ -458,87 +500,3 @@
                     <div class="plan-card">
                         <h3>Diária de Personal</h3>
                         <div class="plan-price">R$ 80<span>/sessão</span></div>
-                        <ul class="plan-features">
-                            <li>Até 1h30 de duração</li>
-                            <li>Acompanhamento presencial</li>
-                            <li>Correção técnica fina</li>
-                            <li>Ajuste seguro de cargas</li>
-                        </ul>
-                    </div>
-                </label>
-
-                <label class="plan-label">
-                    <input type="radio" name="plan" class="plan-input" value="Acompanhamento Mensal" onchange="selecionar(this.value)">
-                    <div class="plan-card">
-                        <h3>Programa Mensal</h3>
-                        <div class="plan-price">R$ 560<span>/inicial</span></div>
-                        <ul class="plan-features">
-                            <li>Aulas particulares de 1h</li>
-                            <li>Opções de 2x ou 3x na semana</li>
-                            <li>Monitoramento constante</li>
-                            <li>Foco total em pontos fracos</li>
-                        </ul>
-                    </div>
-                </label>
-
-                <label class="plan-label">
-                    <input type="radio" name="plan" class="plan-input" value="Treino em Dupla" onchange="selecionar(this.value)">
-                    <div class="plan-card card-dupla">
-                        <div class="plan-badge">Custo-Benefício</div>
-                        <h3>Oferta em Dupla</h3>
-                        <div class="plan-price">R$ 650<span>/mensal</span></div>
-                        <ul class="plan-features">
-                            <li>Treine com parceiro(a)</li>
-                            <li>2x/sem: R$ 325 por pessoa</li>
-                            <li>3x/sem: R$ 450 por pessoa</li>
-                            <li>Economia com mesma qualidade</li>
-                        </ul>
-                    </div>
-                </label>
-            </div>
-
-            <div class="rules-grid">
-                <h4>Condições de Treinamento</h4>
-                <p>Faltas sem aviso prévio são consideradas como aula realizada.</p>
-                <p>Reposições devem ser agendadas dentro da mesma semana.</p>
-                <p>Mensalidade da academia por conta do aluno.</p>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="sticky-action">
-        <a id="link-whats" href="https://wa.me/5511964643494?text=Olá Paulo! Gostaria de mais informações sobre sua consultoria." class="btn-whatsapp" target="_blank">
-            Iniciar minha Evolução
-        </a>
-    </div>
-
-    <footer>
-        <p>PAULO FERNANDO © 2024</p>
-        <p>Designer de Performance | @Paulofernando_personal</p>
-    </footer>
-
-    <script>
-        // Efeito Navbar de Vidro
-        window.onscroll = function() {
-            const nav = document.getElementById('navbar');
-            if (window.scrollY > 80) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        };
-
-        // Seleção de Plano e Atualização Elegante do Botão
-        function selecionar(plano) {
-            const tel = "5511964643494";
-            const msg = `Olá Paulo! Selecionei o plano "${plano}" no site e quero começar meu treinamento.`;
-            const btn = document.getElementById('link-whats');
-            
-            btn.href = `https://wa.me/${tel}?text=${encodeURIComponent(msg)}`;
-            btn.classList.add('active-green');
-            btn.innerHTML = `Confirmar ${plano}`;
-        }
-    </script>
-</body>
-</html>
