@@ -3,307 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paulo Fernando | Personal Trainer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <title>Paulo Fernando | Consultoria Elite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0066ff;
+            --primary: #0071ff;
+            --primary-glow: rgba(0, 113, 255, 0.4);
             --accent: #ffcc00;
-            --bg: #050505;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --text-main: #ffffff;
-            --text-dim: #a0a0a0;
+            --bg-deep: #000000;
+            --bg-surface: rgba(20, 20, 23, 0.7);
+            --text-pure: #ffffff;
+            --text-gray: #b0b0b0;
+            --glass-border: rgba(255, 255, 255, 0.08);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
         
         body { 
-            background-color: var(--bg);
-            background-image: 
-                linear-gradient(to bottom, rgba(5,5,5,0.7) 0%, rgba(5,5,5,1) 100%),
-                url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop'); 
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center;
-            color: var(--text-main); 
-            -webkit-font-smoothing: antialiased;
+            background-color: var(--bg-deep);
+            color: var(--text-pure); 
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* --- STICKY NETFLIX HEADER --- */
+        /* --- FUNDO DINÂMICO --- */
+        .master-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.95) 100%),
+                        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+
+        /* --- BARRA DE NAVEGAÇÃO (ESTILO APPLE/NETFLIX) --- */
         #navbar {
             position: fixed;
             top: 0; width: 100%;
-            padding: 25px 6%;
+            padding: 20px 6%;
             display: flex;
             align-items: center;
             justify-content: space-between;
             z-index: 1000;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
         }
 
         #navbar.scrolled {
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(10, 10, 12, 0.85);
+            backdrop-filter: blur(20px);
             padding: 15px 6%;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .nav-logo {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: -1px;
             color: var(--primary);
             opacity: 0;
-            transform: translateX(-20px);
-            transition: 0.5s ease;
+            transform: translateY(-10px);
+            transition: 0.4s;
         }
 
-        #navbar.scrolled .nav-logo { opacity: 1; transform: translateX(0); }
+        #navbar.scrolled .nav-logo { opacity: 1; transform: translateY(0); }
 
-        /* --- HERO SECTION --- */
+        /* --- CAPA CINEMATOGRÁFICA --- */
         .hero {
-            height: 95vh;
+            position: relative;
+            height: 90vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            align-items: center;
             padding: 0 8%;
-            background: linear-gradient(to right, rgba(0,0,0,0.8) 30%, transparent 100%), url('image.png');
+            /* Camada para a sua foto */
+            background: linear-gradient(to right, var(--bg-deep) 20%, transparent 100%), url('image.png');
             background-size: cover;
             background-position: center 20%;
         }
 
-        .hero-content { max-width: 800px; animation: fadeInUp 1s ease; }
-        .badge { 
-            display: inline-block; padding: 6px 12px; background: rgba(255,255,255,0.1); 
-            border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; 
-            font-size: 0.7rem; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 20px;
-        }
-
+        .hero-content { max-width: 700px; z-index: 2; }
         .hero-content h1 { 
-            font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; line-height: 0.95; 
-            margin-bottom: 20px; text-transform: uppercase; letter-spacing: -2px;
+            font-size: clamp(3.5rem, 10vw, 6.5rem); 
+            font-weight: 900; 
+            line-height: 0.85; 
+            margin-bottom: 25px;
+            letter-spacing: -3px;
+        }
+        
+        .hero-content p { 
+            font-size: 1.2rem; 
+            color: var(--text-gray); 
+            max-width: 450px; 
+            border-left: 3px solid var(--primary);
+            padding-left: 20px;
         }
 
-        .hero-content p { font-size: 1.2rem; color: var(--text-dim); max-width: 500px; font-weight: 400; }
-
-        /* --- ABOUT (GLASS LOOK) --- */
-        .container { max-width: 1300px; margin: 0 auto; padding: 100px 6%; }
-
-        .about-grid {
-            display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px;
-            margin-bottom: 120px; align-items: center;
+        /* --- CONTEÚDO FLUIDO (SEM BARRAS PRETAS) --- */
+        .main-wrapper {
+            position: relative;
+            background: linear-gradient(to bottom, transparent, var(--bg-deep) 10%);
+            margin-top: -10vh;
+            padding-bottom: 150px;
         }
 
-        .about-card-info {
-            background: var(--card-bg); border: 1px solid var(--card-border);
-            padding: 50px; border-radius: 24px; backdrop-filter: blur(15px);
+        .container { max-width: 1200px; margin: 0 auto; padding: 100px 6%; }
+
+        /* --- SOBRE (ESTILO DOCUMENTÁRIO) --- */
+        .about-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 150px;
+            align-items: flex-start;
         }
 
-        .about-card-info h2 { font-size: 2.5rem; margin-bottom: 20px; font-weight: 800; }
-        .about-card-info p { font-size: 1.1rem; color: var(--text-dim); margin-bottom: 30px; line-height: 1.8; }
+        .about-title { font-size: 0.8rem; font-weight: 800; color: var(--primary); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; }
+        .about-text h2 { font-size: 3rem; font-weight: 800; margin-bottom: 30px; line-height: 1.1; }
+        .about-text p { font-size: 1.15rem; color: var(--text-gray); margin-bottom: 25px; text-align: justify; }
 
-        .tag-list { display: flex; flex-wrap: wrap; gap: 10px; }
-        .tag { background: rgba(0,102,255,0.15); color: var(--primary); padding: 8px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; }
+        /* --- PLANOS (ESTILO STREAMING CARDS) --- */
+        .section-header { margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 800; letter-spacing: -1px; }
 
-        /* --- PLANOS (STREAMING STYLE) --- */
-        .section-header { text-align: left; margin-bottom: 50px; }
-        .section-header h2 { font-size: 2.5rem; font-weight: 800; text-transform: uppercase; }
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
 
-        .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-
-        .plan-label { position: relative; cursor: pointer; }
+        .plan-label { position: relative; cursor: pointer; display: block; height: 100%; }
         .plan-input { display: none; }
 
         .plan-card {
-            background: var(--card-bg); border: 1px solid var(--card-border);
-            padding: 40px 30px; border-radius: 20px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            height: 100%; display: flex; flex-direction: column; backdrop-filter: blur(10px);
+            background: var(--bg-surface);
+            border: 1px solid var(--glass-border);
+            padding: 40px 30px;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            backdrop-filter: blur(15px);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
-        .plan-label:hover .plan-card { transform: translateY(-10px); background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); }
+        .plan-label:hover .plan-card {
+            transform: scale(1.03);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
 
-        .plan-input:checked + .plan-card { border-color: var(--primary); background: rgba(0, 102, 255, 0.05); }
+        .plan-input:checked + .plan-card {
+            border-color: var(--primary);
+            background: rgba(0, 113, 255, 0.08);
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
 
-        .plan-price { font-size: 2.2rem; font-weight: 900; margin: 20px 0; }
-        .plan-price span { font-size: 1rem; color: var(--text-dim); font-weight: 400; }
+        .plan-card h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--text-pure); }
+        .plan-price { font-size: 2.5rem; font-weight: 900; margin-bottom: 25px; color: var(--text-pure); }
+        .plan-price span { font-size: 0.9rem; color: var(--text-gray); font-weight: 400; }
 
         .plan-features { list-style: none; flex-grow: 1; margin-bottom: 30px; }
-        .plan-features li { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 12px; display: flex; align-items: center; }
-        .plan-features li::before { content: "•"; color: var(--primary); font-size: 1.5rem; margin-right: 10px; line-height: 0; }
-
-        /* OFERTA ESPECIAL */
-        .plan-input:checked + .card-special { border-color: var(--accent); }
-        .card-special .plan-price { color: var(--accent); }
-
-        /* --- FOOTER CTA --- */
-        .sticky-footer {
-            position: fixed; bottom: 0; width: 100%; padding: 30px 6%;
-            background: linear-gradient(to top, rgba(0,0,0,1) 60%, transparent);
-            display: flex; justify-content: center; z-index: 1000;
+        .plan-features li { 
+            font-size: 0.95rem; color: var(--text-gray); margin-bottom: 12px; 
+            display: flex; align-items: flex-start;
+        }
+        .plan-features li::before { 
+            content: "✓"; color: var(--primary); margin-right: 12px; font-weight: 900; 
         }
 
-        .btn-main {
-            background: var(--primary); color: white; text-decoration: none;
-            padding: 20px 60px; border-radius: 12px; font-weight: 800;
-            font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;
-            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.3); transition: 0.3s;
+        /* CARD ESPECIAL */
+        .card-dupla { border: 1px solid rgba(255, 204, 0, 0.2); }
+        .plan-input:checked + .card-dupla { border-color: var(--accent); background: rgba(255, 204, 0, 0.05); box-shadow: 0 0 30px rgba(255, 204, 0, 0.2); }
+        .card-dupla h3 { color: var(--accent); }
+
+        /* --- BARRA FIXA WHATSAPP (AÇÃO FINAL) --- */
+        .sticky-action {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
         }
 
-        .btn-main:hover { transform: scale(1.05); box-shadow: 0 25px 50px rgba(0, 102, 255, 0.5); background: #1a75ff; }
+        .btn-whatsapp {
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 22px 50px;
+            border-radius: 100px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 15px 40px var(--primary-glow);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-5px) scale(1.05);
+            background: #1a7fff;
+            box-shadow: 0 20px 50px rgba(0, 113, 255, 0.6);
+        }
 
         /* --- INFO BOX --- */
-        .info-box {
-            background: rgba(255, 255, 255, 0.03); border-radius: 16px; padding: 40px;
-            margin-top: 80px; border: 1px solid rgba(255,255,255,0.05);
+        .rules-grid {
+            margin-top: 100px;
+            padding: 40px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 30px;
+            border: 1px solid var(--glass-border);
         }
-        .info-box h4 { color: #ff4d4d; margin-bottom: 20px; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; }
-        .info-box p { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 10px; }
+        .rules-grid h4 { color: #ff4747; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 3px; margin-bottom: 20px; }
+        .rules-grid p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 12px; }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 900px) {
-            .about-grid { grid-template-columns: 1fr; }
-            .hero-content h1 { font-size: 3.5rem; }
+            .about-section { grid-template-columns: 1fr; gap: 40px; }
+            .hero-content h1 { font-size: 4rem; }
+            .hero { background-position: 70% center; }
         }
     </style>
 </head>
 <body>
 
+    <div class="master-bg"></div>
+
     <nav id="navbar">
         <div class="nav-logo">Paulo Fernando</div>
-        <div style="font-weight: 800; font-size: 0.6rem; letter-spacing: 3px; color: var(--text-dim);">SYSTEM PERFORMANCE</div>
+        <div style="font-weight: 800; font-size: 0.65rem; letter-spacing: 4px; color: var(--primary);">ESTRATÉGIA & PERFORMANCE</div>
     </nav>
 
-    <header class="hero">
+    <section class="hero">
         <div class="hero-content">
-            <div class="badge">CONSULTORIA PREMIUM</div>
-            <h1>RESULTS<br>OVER DREAMS.</h1>
-            <p>Especialista em treinamento baseado em evidências pela <strong>Universidade Cidade de São Paulo (UNICID)</strong>. Sem fórmulas mágicas, apenas ciência aplicada ao seu corpo.</p>
+            <h1 style="animation: fadeInUp 1s ease both;">TREINO É<br>CIÊNCIA.</h1>
+            <p style="animation: fadeInUp 1s ease 0.2s both;">
+                Especialista pela <strong>Unicid</strong> (Universidade Cidade de São Paulo). 
+                Transformo evidência científica em resultados físicos reais desde 2014.
+            </p>
         </div>
-    </header>
+    </section>
 
-    <div class="container">
-        
-        <section class="about-grid">
-            <div class="about-card-info">
-                <h2>The Professional</h2>
-                <p>Desde 2014, transformando o entusiasmo pela musculação em uma metodologia de alto impacto. Meu trabalho foca na periodização inteligente, garantindo que cada repetição tenha um propósito claro no seu desenvolvimento.</p>
-                <div class="tag-list">
-                    <div class="tag">Bacharelado UNICID</div>
-                    <div class="tag">Treinamento de Força</div>
-                    <div class="tag">Biomecânica Aplicada</div>
-                    <div class="tag">+10 Anos de Experience</div>
+    <div class="main-wrapper">
+        <div class="container">
+            
+            <section class="about-section">
+                <div class="about-text">
+                    <div class="about-title">A Metodologia</div>
+                    <h2>Sem invenções,<br>apenas o que funciona.</h2>
+                    <p>Minha trajetória começou em 2014, unindo a paixão pela musculação ao rigor acadêmico da Unicid. Hoje, minha missão é entregar uma consultoria que respeite sua individualidade biológica e sua rotina.</p>
+                    <p>O foco é a <strong>Periodização Inteligente</strong>: saber exatamente quando progredir e como ajustar cada variável do seu treino.</p>
                 </div>
+                <div style="background: rgba(255,255,255,0.03); padding: 40px; border-radius: 32px; border: 1px solid var(--glass-border);">
+                    <h3 style="margin-bottom: 20px; font-weight: 700; color: var(--primary);">Formação & Base</h3>
+                    <ul style="list-style: none; color: var(--text-gray);">
+                        <li style="margin-bottom: 15px;">• Bacharelado em Ed. Física (Unicid)</li>
+                        <li style="margin-bottom: 15px;">• Especialista em Treino de Força</li>
+                        <li style="margin-bottom: 15px;">• Análise Biomecânica de Movimento</li>
+                        <li>• +10 anos de experiência prática</li>
+                    </ul>
+                </div>
+            </section>
+
+            <div class="section-header">
+                <h2>Selecione seu Plano</h2>
             </div>
-            <div style="padding: 20px;">
-                <h3 style="color: var(--primary); margin-bottom: 15px; font-weight: 800;">METODOLOGIA</h3>
-                <p style="color: var(--text-dim);">Análise de rotina, correção biomecânica e progressão de carga monitorada. Não é apenas um treino, é um sistema de evolução constante.</p>
+
+            <div class="plans-grid">
+                <label class="plan-label">
+                    <input type="radio" name="plan" class="plan-input" value="Planilha de Treinamento" onchange="selecionar(this.value)">
+                    <div class="plan-card">
+                        <h3>Planilha de Treino</h3>
+                        <div class="plan-price">R$ 90 <span>/ bimestral</span></div>
+                        <ul class="plan-features">
+                            <li>100% Personalizada</li>
+                            <li>Planejada para sua rotina</li>
+                            <li>Ajuste de dias e horários</li>
+                            <li>Validade de 2 meses</li>
+                        </ul>
+                    </div>
+                </label>
+
+                <label class="plan-label">
+                    <input type="radio" name="plan" class="plan-input" value="Diária de Personal" onchange="selecionar(this.value)">
+                    <div class="plan-card">
+                        <h3>Diária de Personal</h3>
+                        <div class="plan-price">R$ 80 <span>/ sessão</span></div>
+                        <ul class="plan-features">
+                            <li>Até 1h30 de duração</li>
+                            <li>Acompanhamento presencial</li>
+                            <li>Correção técnica fina</li>
+                            <li>Ajuste seguro de cargas</li>
+                        </ul>
+                    </div>
+                </label>
+
+                <label class="plan-label">
+                    <input type="radio" name="plan" class="plan-input" value="Acompanhamento Mensal" onchange="selecionar(this.value)">
+                    <div class="plan-card">
+                        <h3>Programa Mensal</h3>
+                        <div class="plan-price">R$ 560 <span>/ inicial</span></div>
+                        <ul class="plan-features">
+                            <li>Aulas particulares de 1h</li>
+                            <li>Opções de 2x ou 3x na semana</li>
+                            <li>Monitoramento constante</li>
+                            <li>Foco total em pontos fracos</li>
+                        </ul>
+                    </div>
+                </label>
+
+                <label class="plan-label">
+                    <input type="radio" name="plan" class="plan-input" value="Treino em Dupla" onchange="selecionar(this.value)">
+                    <div class="plan-card card-dupla">
+                        <h3>Oferta em Dupla</h3>
+                        <div class="plan-price">R$ 650 <span>/ mensal</span></div>
+                        <ul class="plan-features">
+                            <li>Treine com um parceiro(a)</li>
+                            <li>2x/sem: R$ 325 por pessoa</li>
+                            <li>3x/sem: R$ 450 por pessoa</li>
+                            <li>Economia com mesma qualidade</li>
+                        </ul>
+                    </div>
+                </label>
             </div>
-        </section>
 
-        <div class="section-header">
-            <h2>Choose Your Plan</h2>
+            <div class="rules-grid">
+                <h4>Condições de Treinamento</h4>
+                <p>• Faltas sem aviso prévio são consideradas como aula realizada.</p>
+                <p>• Reposições devem ser agendadas dentro da mesma semana.</p>
+                <p>• Mensalidade da academia por conta do aluno (Isento na rede Motion Fit).</p>
+            </div>
+
         </div>
-
-        <div class="plans-grid">
-            <label class="plan-label">
-                <input type="radio" name="plan" class="plan-input" value="Planilha de Treinamento" onchange="updateWA(this.value)">
-                <div class="plan-card">
-                    <h3>Planilha de Treinamento</h3>
-                    <div class="plan-price">R$ 90 <span>/ bimestral</span></div>
-                    <ul class="plan-features">
-                        <li>Planejamento Individualizado</li>
-                        <li>Acordo com sua rotina</li>
-                        <li>Foco em objetivos específicos</li>
-                        <li>Validade de 2 meses</li>
-                    </ul>
-                </div>
-            </label>
-
-            <label class="plan-label">
-                <input type="radio" name="plan" class="plan-input" value="Diária de Personal" onchange="updateWA(this.value)">
-                <div class="plan-card">
-                    <h3>Diária de Personal</h3>
-                    <div class="plan-price">R$ 80 <span>/ sessão</span></div>
-                    <ul class="plan-features">
-                        <li>Duração de 1h a 1h30</li>
-                        <li>Acompanhamento presencial</li>
-                        <li>Correção técnica imediata</li>
-                        <li>Ajuste de cargas seguro</li>
-                    </ul>
-                </div>
-            </label>
-
-            <label class="plan-label">
-                <input type="radio" name="plan" class="plan-input" value="Acompanhamento Mensal" onchange="updateWA(this.value)">
-                <div class="plan-card">
-                    <h3>Programa Mensal</h3>
-                    <div class="plan-price">R$ 560 <span>/ mensal</span></div>
-                    <ul class="plan-features">
-                        <li>Acompanhamento 1:1</li>
-                        <li>Opções 2x ou 3x na semana</li>
-                        <li>Aulas particulares de 1h</li>
-                        <li>Suporte total a dúvidas</li>
-                    </ul>
-                </div>
-            </label>
-
-            <label class="plan-label">
-                <input type="radio" name="plan" class="plan-input" value="Treino em Dupla" onchange="updateWA(this.value)">
-                <div class="plan-card card-special">
-                    <h3 style="color: var(--accent);">Special: Treino em Dupla</h3>
-                    <div class="plan-price">R$ 650 <span>/ mensal</span></div>
-                    <ul class="plan-features">
-                        <li>Divida o valor com um parceiro</li>
-                        <li>2x na semana: R$ 325 por pessoa</li>
-                        <li>3x na semana: R$ 450 por pessoa</li>
-                        <li>Motivação e performance juntas</li>
-                    </ul>
-                </div>
-            </label>
-        </div>
-
-        <div class="info-box">
-            <h4>POLÍTICAS DE TREINAMENTO</h4>
-            <p>• Faltas sem aviso prévio são contabilizadas como aula realizada.</p>
-            <p>• Reposições devem ocorrer obrigatoriamente na mesma semana do aviso.</p>
-            <p>• Taxas de academia são de responsabilidade do aluno (Livre na rede Motion Fit).</p>
-        </div>
-
     </div>
 
-    <div class="sticky-footer">
-        <a id="wa-btn" href="https://wa.me/5511964643494?text=Olá Paulo! Gostaria de iniciar minha consultoria." class="btn-main" target="_blank">
-            Get Started Now
+    <div class="sticky-action">
+        <a id="link-whats" href="https://wa.me/5511964643494?text=Olá Paulo! Gostaria de mais informações sobre sua consultoria." class="btn-whatsapp" target="_blank">
+            Iniciar minha Evolução
         </a>
     </div>
 
-    <footer style="padding: 100px 6% 150px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
-        <p style="color: var(--text-dim); font-size: 0.8rem;">PAULO FERNANDO © 2024 | ALL RIGHTS RESERVED</p>
-        <p style="color: var(--text-dim); font-size: 0.8rem; margin-top: 10px;">@paulofernando_personal | (11) 9 6464-3494</p>
+    <footer style="padding: 100px 6% 180px; text-align: center; opacity: 0.5; font-size: 0.8rem;">
+        <p>PAULO FERNANDO © 2024 | DESIGNER DE PERFORMANCE</p>
+        <p style="margin-top: 10px;">Universidade Cidade de São Paulo (UNICID)</p>
     </footer>
 
     <script>
-        // Efeito Navbar Netflix
+        // Efeito Navbar
         window.onscroll = function() {
             var nav = document.getElementById('navbar');
-            if (window.scrollY > 150) {
+            if (window.scrollY > 120) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
             }
         };
 
-        // Integração WhatsApp Inteligente
-        function updateWA(plano) {
-            const numero = "5511964643494";
-            const texto = `Olá Paulo! Selecionei o plano "${plano}" no seu site e gostaria de começar.`;
-            document.getElementById('wa-btn').href = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+        // Seleção de Plano e Atualização do Botão
+        function selecionar(plano) {
+            const tel = "5511964643494";
+            const msg = `Olá Paulo! Selecionei o plano "${plano}" no site e quero começar meu treinamento.`;
+            document.getElementById('link-whats').href = `https://wa.me/${tel}?text=${encodeURIComponent(msg)}`;
+            
+            // Feedback tátil visual
+            const btn = document.getElementById('link-whats');
+            btn.style.background = "#25d366"; // Muda para verde WhatsApp ao selecionar
+            btn.innerText = "Enviar Plano Escolhido";
         }
     </script>
 </body>
