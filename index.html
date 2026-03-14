@@ -3,161 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paulo Fernando | Consultoria Esportiva</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>Paulo Fernando | Personal Trainer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0055ff; /* Azul Netflix Style */
-            --netflix-red: #e50914;
-            --bg-dark: #000000;
-            --card-bg: rgba(20, 20, 20, 0.9);
-            --text: #ffffff;
-            --gold: #ffb800;
+            --primary: #0066ff;
+            --accent: #ffcc00;
+            --bg: #050505;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         
         body { 
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
-                        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop'); /* IMAGEM DE FUNDO ESTILO PINTEREST */
+            background-color: var(--bg);
+            background-image: 
+                linear-gradient(to bottom, rgba(5,5,5,0.7) 0%, rgba(5,5,5,1) 100%),
+                url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop'); 
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
-            color: var(--text); 
-            line-height: 1.6;
+            color: var(--text-main); 
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* --- NAVBAR ESTILO NETFLIX (STICKY) --- */
+        /* --- STICKY NETFLIX HEADER --- */
         #navbar {
             position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 5%;
+            top: 0; width: 100%;
+            padding: 25px 6%;
             display: flex;
             align-items: center;
             justify-content: space-between;
             z-index: 1000;
-            transition: all 0.5s ease;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         #navbar.scrolled {
-            background-color: var(--bg-dark);
-            padding: 12px 5%;
-            border-bottom: 1px solid #222;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 15px 6%;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .nav-logo {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 900;
-            color: var(--primary);
             text-transform: uppercase;
-            letter-spacing: -1px;
+            letter-spacing: 2px;
+            color: var(--primary);
             opacity: 0;
-            transform: translateY(-10px);
-            transition: all 0.4s ease;
+            transform: translateX(-20px);
+            transition: 0.5s ease;
         }
 
-        #navbar.scrolled .nav-logo { opacity: 1; transform: translateY(0); }
+        #navbar.scrolled .nav-logo { opacity: 1; transform: translateX(0); }
 
-        /* --- CAPA (HERO) --- */
+        /* --- HERO SECTION --- */
         .hero {
-            height: 100vh;
-            background: linear-gradient(to bottom, transparent 50%, var(--bg-dark)), 
-                        url('image.png'); /* SUA FOTO DE CAPA */
-            background-size: cover;
-            background-position: center 20%;
+            height: 95vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 0 8%;
+            background: linear-gradient(to right, rgba(0,0,0,0.8) 30%, transparent 100%), url('image.png');
+            background-size: cover;
+            background-position: center 20%;
         }
 
-        .hero-content h1 { font-size: 5rem; font-weight: 900; text-transform: uppercase; line-height: 0.9; margin-bottom: 15px; }
-        .hero-content p { font-size: 1.2rem; color: #ccc; max-width: 600px; font-weight: 300; }
-        .badge { display: inline-block; background: var(--primary); color: white; padding: 5px 15px; font-weight: 800; border-radius: 4px; margin-bottom: 15px; font-size: 0.8rem; }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 60px 5%; }
-
-        /* --- SOBRE MIM (DADOS DO PDF) --- */
-        .section-about {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 100px;
-            align-items: center;
+        .hero-content { max-width: 800px; animation: fadeInUp 1s ease; }
+        .badge { 
+            display: inline-block; padding: 6px 12px; background: rgba(255,255,255,0.1); 
+            border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; 
+            font-size: 0.7rem; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 20px;
         }
 
-        .about-text h2 { font-size: 2.5rem; margin-bottom: 20px; color: var(--primary); }
-        .about-text p { font-size: 1.1rem; color: #bbb; margin-bottom: 20px; }
-        .formation-list { list-style: none; }
-        .formation-list li { margin-bottom: 10px; padding-left: 25px; position: relative; color: #ddd; }
-        .formation-list li::before { content: "✓"; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
+        .hero-content h1 { 
+            font-size: clamp(3rem, 8vw, 6rem); font-weight: 900; line-height: 0.95; 
+            margin-bottom: 20px; text-transform: uppercase; letter-spacing: -2px;
+        }
 
-        /* --- PLANOS (TIKAR) --- */
-        .section-title { font-size: 2rem; margin-bottom: 40px; font-weight: 900; text-transform: uppercase; }
-        .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .hero-content p { font-size: 1.2rem; color: var(--text-dim); max-width: 500px; font-weight: 400; }
 
+        /* --- ABOUT (GLASS LOOK) --- */
+        .container { max-width: 1300px; margin: 0 auto; padding: 100px 6%; }
+
+        .about-grid {
+            display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px;
+            margin-bottom: 120px; align-items: center;
+        }
+
+        .about-card-info {
+            background: var(--card-bg); border: 1px solid var(--card-border);
+            padding: 50px; border-radius: 24px; backdrop-filter: blur(15px);
+        }
+
+        .about-card-info h2 { font-size: 2.5rem; margin-bottom: 20px; font-weight: 800; }
+        .about-card-info p { font-size: 1.1rem; color: var(--text-dim); margin-bottom: 30px; line-height: 1.8; }
+
+        .tag-list { display: flex; flex-wrap: wrap; gap: 10px; }
+        .tag { background: rgba(0,102,255,0.15); color: var(--primary); padding: 8px 16px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; }
+
+        /* --- PLANOS (STREAMING STYLE) --- */
+        .section-header { text-align: left; margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 800; text-transform: uppercase; }
+
+        .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+
+        .plan-label { position: relative; cursor: pointer; }
         .plan-input { display: none; }
+
         .plan-card {
-            background: var(--card-bg);
-            border: 2px solid #333;
-            padding: 35px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            backdrop-filter: blur(10px);
+            background: var(--card-bg); border: 1px solid var(--card-border);
+            padding: 40px 30px; border-radius: 20px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%; display: flex; flex-direction: column; backdrop-filter: blur(10px);
         }
 
-        .plan-card:hover { transform: scale(1.05); border-color: #555; }
-        
-        /* Tikar plano */
-        .plan-input:checked + .plan-card { border-color: var(--primary); background: rgba(0, 85, 255, 0.1); }
-        .check-icon {
-            position: absolute; top: 20px; right: 20px;
-            width: 24px; height: 24px; border: 2px solid #444; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; transition: 0.3s;
+        .plan-label:hover .plan-card { transform: translateY(-10px); background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); }
+
+        .plan-input:checked + .plan-card { border-color: var(--primary); background: rgba(0, 102, 255, 0.05); }
+
+        .plan-price { font-size: 2.2rem; font-weight: 900; margin: 20px 0; }
+        .plan-price span { font-size: 1rem; color: var(--text-dim); font-weight: 400; }
+
+        .plan-features { list-style: none; flex-grow: 1; margin-bottom: 30px; }
+        .plan-features li { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 12px; display: flex; align-items: center; }
+        .plan-features li::before { content: "•"; color: var(--primary); font-size: 1.5rem; margin-right: 10px; line-height: 0; }
+
+        /* OFERTA ESPECIAL */
+        .plan-input:checked + .card-special { border-color: var(--accent); }
+        .card-special .plan-price { color: var(--accent); }
+
+        /* --- FOOTER CTA --- */
+        .sticky-footer {
+            position: fixed; bottom: 0; width: 100%; padding: 30px 6%;
+            background: linear-gradient(to top, rgba(0,0,0,1) 60%, transparent);
+            display: flex; justify-content: center; z-index: 1000;
         }
-        .plan-input:checked + .plan-card .check-icon { background: var(--primary); border-color: var(--primary); }
-        .plan-input:checked + .plan-card .check-icon::after { content: "✓"; color: white; font-size: 12px; font-weight: bold; }
 
-        .plan-name { font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; color: #fff; }
-        .plan-price { font-size: 2rem; font-weight: 900; margin-bottom: 20px; color: var(--text); }
-        .plan-features { list-style: none; flex-grow: 1; }
-        .plan-features li { font-size: 0.9rem; color: #aaa; margin-bottom: 8px; }
-
-        .special-card { border-color: var(--gold) !important; }
-        .plan-input:checked + .special-card { background: rgba(255, 184, 0, 0.1); }
-        .plan-input:checked + .special-card .check-icon { background: var(--gold); border-color: var(--gold); }
-
-        /* --- BOTÃO WHATSAPP --- */
-        .footer-cta {
-            position: sticky; bottom: 30px; text-align: center; margin-top: 60px; z-index: 100;
+        .btn-main {
+            background: var(--primary); color: white; text-decoration: none;
+            padding: 20px 60px; border-radius: 12px; font-weight: 800;
+            font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;
+            box-shadow: 0 20px 40px rgba(0, 102, 255, 0.3); transition: 0.3s;
         }
-        .btn-whatsapp {
-            background: #25d366; color: white; text-decoration: none; padding: 20px 50px;
-            border-radius: 50px; font-weight: 900; font-size: 1.2rem;
-            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.4); transition: 0.3s; display: inline-block;
-        }
-        .btn-whatsapp:hover { transform: scale(1.08); background: #1eb954; }
 
-        /* --- REGRAS --- */
+        .btn-main:hover { transform: scale(1.05); box-shadow: 0 25px 50px rgba(0, 102, 255, 0.5); background: #1a75ff; }
+
+        /* --- INFO BOX --- */
         .info-box {
-            background: rgba(229, 9, 20, 0.1); border-left: 5px solid var(--netflix-red);
-            padding: 30px; margin: 80px 0; border-radius: 8px;
+            background: rgba(255, 255, 255, 0.03); border-radius: 16px; padding: 40px;
+            margin-top: 80px; border: 1px solid rgba(255,255,255,0.05);
         }
-        .info-box h4 { color: var(--netflix-red); text-transform: uppercase; margin-bottom: 15px; }
-        .info-box p { color: #ccc; font-size: 0.9rem; margin-bottom: 5px; }
+        .info-box h4 { color: #ff4d4d; margin-bottom: 20px; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; }
+        .info-box p { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 10px; }
 
-        footer { text-align: center; padding: 60px; color: #555; font-size: 0.8rem; border-top: 1px solid #222; }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 3rem; }
-            .section-about { grid-template-columns: 1fr; }
+        @media (max-width: 900px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 3.5rem; }
         }
     </style>
 </head>
@@ -165,143 +176,135 @@
 
     <nav id="navbar">
         <div class="nav-logo">Paulo Fernando</div>
-        <div style="font-weight: 700; letter-spacing: 1px; font-size: 0.7rem; color: #aaa;">PROFISSIONAL DE ED. FÍSICA</div>
+        <div style="font-weight: 800; font-size: 0.6rem; letter-spacing: 3px; color: var(--text-dim);">SYSTEM PERFORMANCE</div>
     </nav>
 
     <header class="hero">
         <div class="hero-content">
-            <span class="badge">Nº 1 EM PERFORMANCE</span>
-            <h1>PAULO<br>FERNANDO</h1>
-            <p>Trabalho com treinamento baseado em evidência: <strong>Sem invenção!</strong> Focado em resultados reais através da ciência do esporte.</p>
+            <div class="badge">CONSULTORIA PREMIUM</div>
+            <h1>RESULTS<br>OVER DREAMS.</h1>
+            <p>Especialista em treinamento baseado em evidências pela <strong>Universidade Cidade de São Paulo (UNICID)</strong>. Sem fórmulas mágicas, apenas ciência aplicada ao seu corpo.</p>
         </div>
     </header>
 
     <div class="container">
         
-        <section class="section-about">
-            <div class="about-text">
-                <h2>Sobre o Personal</h2>
-                <p>Iniciei minha vivência na área esportiva em 2014, quando a paixão pela musculação transformou minha carreira. Hoje, aplico essa experiência aliada ao estudo constante para ajudar você a alcançar seu ápice físico.</p>
-                <ul class="formation-list">
-                    <li>Bacharelado em Educação Física (UNICID)</li>
-                    <li>Especialista em Treinamento de Força</li>
-                    <li>Periodização Baseada em Evidências</li>
-                    <li>Consultoria Individualizada</li>
-                </ul>
+        <section class="about-grid">
+            <div class="about-card-info">
+                <h2>The Professional</h2>
+                <p>Desde 2014, transformando o entusiasmo pela musculação em uma metodologia de alto impacto. Meu trabalho foca na periodização inteligente, garantindo que cada repetição tenha um propósito claro no seu desenvolvimento.</p>
+                <div class="tag-list">
+                    <div class="tag">Bacharelado UNICID</div>
+                    <div class="tag">Treinamento de Força</div>
+                    <div class="tag">Biomecânica Aplicada</div>
+                    <div class="tag">+10 Anos de Experience</div>
+                </div>
             </div>
-            <div style="background: var(--card-bg); padding: 40px; border-radius: 20px; border: 1px solid #333;">
-                <h3 style="color: var(--primary); margin-bottom: 15px;">Metodologia</h3>
-                <p style="color: #888;">Cada plano é construído analisando sua rotina, limitações e objetivos específicos. O foco não é apenas treinar, mas treinar de forma inteligente.</p>
+            <div style="padding: 20px;">
+                <h3 style="color: var(--primary); margin-bottom: 15px; font-weight: 800;">METODOLOGIA</h3>
+                <p style="color: var(--text-dim);">Análise de rotina, correção biomecânica e progressão de carga monitorada. Não é apenas um treino, é um sistema de evolução constante.</p>
             </div>
         </section>
 
-        <h2 class="section-title">Escolha seu Plano</h2>
+        <div class="section-header">
+            <h2>Choose Your Plan</h2>
+        </div>
 
         <div class="plans-grid">
-            <label>
-                <input type="radio" name="plan" class="plan-input" value="Planilha de Treinamento" onchange="selecionarPlano(this.value)">
+            <label class="plan-label">
+                <input type="radio" name="plan" class="plan-input" value="Planilha de Treinamento" onchange="updateWA(this.value)">
                 <div class="plan-card">
-                    <div class="check-icon"></div>
-                    <div class="plan-name">Planilha de Treinamento</div>
-                    <div class="plan-price">R$ 90,00</div>
+                    <h3>Planilha de Treinamento</h3>
+                    <div class="plan-price">R$ 90 <span>/ bimestral</span></div>
                     <ul class="plan-features">
-                        <li>• Totalmente personalizada</li>
-                        <li>• Foco no seu objetivo</li>
-                        <li>• Acordo com sua rotina</li>
-                        <li>• Validade de 2 meses</li>
+                        <li>Planejamento Individualizado</li>
+                        <li>Acordo com sua rotina</li>
+                        <li>Foco em objetivos específicos</li>
+                        <li>Validade de 2 meses</li>
                     </ul>
                 </div>
             </label>
 
-            <label>
-                <input type="radio" name="plan" class="plan-input" value="Diária de Personal" onchange="selecionarPlano(this.value)">
+            <label class="plan-label">
+                <input type="radio" name="plan" class="plan-input" value="Diária de Personal" onchange="updateWA(this.value)">
                 <div class="plan-card">
-                    <div class="check-icon"></div>
-                    <div class="plan-name">Diária de Personal</div>
-                    <div class="plan-price">R$ 80,00</div>
+                    <h3>Diária de Personal</h3>
+                    <div class="plan-price">R$ 80 <span>/ sessão</span></div>
                     <ul class="plan-features">
-                        <li>• Aula avulsa (1h a 1h30)</li>
-                        <li>• Acompanhamento presencial</li>
-                        <li>• Correção de movimentos</li>
-                        <li>• Segurança na carga</li>
+                        <li>Duração de 1h a 1h30</li>
+                        <li>Acompanhamento presencial</li>
+                        <li>Correção técnica imediata</li>
+                        <li>Ajuste de cargas seguro</li>
                     </ul>
                 </div>
             </label>
 
-            <label>
-                <input type="radio" name="plan" class="plan-input" value="Acompanhamento Mensal" onchange="selecionarPlano(this.value)">
+            <label class="plan-label">
+                <input type="radio" name="plan" class="plan-input" value="Acompanhamento Mensal" onchange="updateWA(this.value)">
                 <div class="plan-card">
-                    <div class="check-icon"></div>
-                    <div class="plan-name">Programa Mensal</div>
-                    <div class="plan-price">R$ 560 a R$ 840</div>
+                    <h3>Programa Mensal</h3>
+                    <div class="plan-price">R$ 560 <span>/ mensal</span></div>
                     <ul class="plan-features">
-                        <li>• Acompanhamento 100% individual</li>
-                        <li>• Aulas particulares de 1h</li>
-                        <li>• Opções de 2x ou 3x na semana</li>
-                        <li>• Foco em pontos fracos</li>
+                        <li>Acompanhamento 1:1</li>
+                        <li>Opções 2x ou 3x na semana</li>
+                        <li>Aulas particulares de 1h</li>
+                        <li>Suporte total a dúvidas</li>
                     </ul>
                 </div>
             </label>
 
-            <label>
-                <input type="radio" name="plan" class="plan-input" value="Acompanhamento em Dupla" onchange="selecionarPlano(this.value)">
-                <div class="plan-card special-card">
-                    <div class="check-icon"></div>
-                    <div class="plan-name" style="color: var(--gold);">Oferta: Treino em Dupla</div>
-                    <div class="plan-price">A partir R$ 650</div>
+            <label class="plan-label">
+                <input type="radio" name="plan" class="plan-input" value="Treino em Dupla" onchange="updateWA(this.value)">
+                <div class="plan-card card-special">
+                    <h3 style="color: var(--accent);">Special: Treino em Dupla</h3>
+                    <div class="plan-price">R$ 650 <span>/ mensal</span></div>
                     <ul class="plan-features">
-                        <li>• Treine com um parceiro(a)</li>
-                        <li>• 2x na semana: R$ 650 total</li>
-                        <li>• 3x na semana: R$ 900 total</li>
-                        <li>• Economia e motivação mútua</li>
+                        <li>Divida o valor com um parceiro</li>
+                        <li>2x na semana: R$ 325 por pessoa</li>
+                        <li>3x na semana: R$ 450 por pessoa</li>
+                        <li>Motivação e performance juntas</li>
                     </ul>
                 </div>
             </label>
         </div>
 
         <div class="info-box">
-            <h4>Informações Importantes</h4>
-            <p>• Faltas sem aviso prévio serão consideradas como aula realizada.</p>
-            <p>• Faltas com aviso devem ser remarcadas dentro da mesma semana.</p>
-            <p>• Mensalidade da academia é responsabilidade do aluno.</p>
+            <h4>POLÍTICAS DE TREINAMENTO</h4>
+            <p>• Faltas sem aviso prévio são contabilizadas como aula realizada.</p>
+            <p>• Reposições devem ocorrer obrigatoriamente na mesma semana do aviso.</p>
+            <p>• Taxas de academia são de responsabilidade do aluno (Livre na rede Motion Fit).</p>
         </div>
 
     </div>
 
-    <div class="footer-cta">
-        <a id="wa-link" href="https://wa.me/5511964643494?text=Olá Paulo! Gostaria de saber mais sobre os seus planos." class="btn-whatsapp" target="_blank">
-            QUERO COMEÇAR AGORA
+    <div class="sticky-footer">
+        <a id="wa-btn" href="https://wa.me/5511964643494?text=Olá Paulo! Gostaria de iniciar minha consultoria." class="btn-main" target="_blank">
+            Get Started Now
         </a>
     </div>
 
-    <footer>
-        <p>Paulo Fernando © 2024 | Consultoria Esportiva Profissional</p>
-        <p>Instagram: @paulofernando_personal</p>
+    <footer style="padding: 100px 6% 150px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
+        <p style="color: var(--text-dim); font-size: 0.8rem;">PAULO FERNANDO © 2024 | ALL RIGHTS RESERVED</p>
+        <p style="color: var(--text-dim); font-size: 0.8rem; margin-top: 10px;">@paulofernando_personal | (11) 9 6464-3494</p>
     </footer>
 
     <script>
-        // Efeito Scroll Netflix
+        // Efeito Navbar Netflix
         window.onscroll = function() {
             var nav = document.getElementById('navbar');
-            if (window.scrollY > 100) {
+            if (window.scrollY > 150) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
             }
         };
 
-        // Lógica de Tikar e WhatsApp
-        function selecionarPlano(plano) {
-            const tel = "5511964643494";
-            const msg = `Olá Paulo! Vi o plano "${plano}" e queria saber mais como funciona.`;
-            document.getElementById('wa-link').href = `https://wa.me/${tel}?text=${encodeURIComponent(msg)}`;
-            
-            // Feedback de clique suave
-            const btn = document.getElementById('wa-link');
-            btn.style.transform = "scale(1.1)";
-            setTimeout(() => btn.style.transform = "scale(1)", 200);
+        // Integração WhatsApp Inteligente
+        function updateWA(plano) {
+            const numero = "5511964643494";
+            const texto = `Olá Paulo! Selecionei o plano "${plano}" no seu site e gostaria de começar.`;
+            document.getElementById('wa-btn').href = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
         }
     </script>
-
 </body>
 </html>
